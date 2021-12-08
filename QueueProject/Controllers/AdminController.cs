@@ -159,5 +159,37 @@ namespace QueueProject.Controllers
 
             return Ok(new { model.OfficeId, model.Name, model.Description, model.Max_users });
         }
+
+        [HttpGet("user/queue/all/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetQueueForUser(Guid id)
+        {
+            var user = await _context.Users
+                .Include(x => x.Queues)
+                .SingleOrDefaultAsync(x => x.UserId == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user.Queues);
+        }
+
+        [HttpGet("OfficeObject/queue/all/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetQueueForOfficeObject(int id)
+        {
+            var user = await _context.OfficeObjects
+                .Include(x => x.Queues)
+                .SingleOrDefaultAsync(x => x.OfficeObjectId == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user.Queues);
+        }
     }
 }
