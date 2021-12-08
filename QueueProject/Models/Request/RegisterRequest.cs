@@ -16,7 +16,5 @@ namespace QueueProject.Models.Request
         [Required]
         [StringLength(18, MinimumLength = 8)]
         public string Password { set; get; }
-        [Required]
-        public string Role { set; get; }
     }
 }

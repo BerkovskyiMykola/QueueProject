@@ -1,29 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace QueueProject.Models
+namespace QueueProject.Models.Request
 {
-    public class User
+    public class CreateOfficeRequest
     {
-        public Guid UserId { get; set; }
+        [Required]
+        [StringLength(40, MinimumLength = 3)]
+        public string Name { get; set; }
+        [StringLength(256, MinimumLength = 0)]
+        public string Description { get; set; }
+        public int AddressId { get; set; }
+
         [Required]
         [StringLength(30, MinimumLength = 2)]
         public string Lastname { get; set; }
         [Required]
         [StringLength(30, MinimumLength = 2)]
         public string Firstname { get; set; }
-        public DateTime DateBirth { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+        [Required]
+        [StringLength(18, MinimumLength = 8)]
         public string Password { get; set; }
-
-        public int RoleId { get; set; }
-        public Role Role { get; set; }
-        public int? OfficeId { get; set; }
-        public Office Office { get; set; }
-
-        public List<Queue> Queues { get; set; } = new List<Queue>();
     }
 }
