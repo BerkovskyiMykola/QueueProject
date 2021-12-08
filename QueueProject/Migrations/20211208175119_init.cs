@@ -103,7 +103,7 @@ namespace QueueProject.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoleId = table.Column<int>(type: "int", nullable: false),
-                    OfficeId = table.Column<int>(type: "int", nullable: false)
+                    OfficeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -113,7 +113,7 @@ namespace QueueProject.Migrations
                         column: x => x.OfficeId,
                         principalTable: "Offices",
                         principalColumn: "OfficeId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Users_Roles_RoleId",
                         column: x => x.RoleId,
@@ -128,7 +128,7 @@ namespace QueueProject.Migrations
                 {
                     QueueId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OfficeObjectId = table.Column<int>(type: "int", nullable: false),
                     StatusId = table.Column<int>(type: "int", nullable: false),
                     DateTimeCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -155,7 +155,7 @@ namespace QueueProject.Migrations
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(

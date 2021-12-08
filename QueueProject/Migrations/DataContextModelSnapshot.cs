@@ -114,7 +114,7 @@ namespace QueueProject.Migrations
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("QueueId");
@@ -210,7 +210,7 @@ namespace QueueProject.Migrations
                     b.Property<string>("Lastname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OfficeId")
+                    b.Property<int?>("OfficeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Password")
@@ -266,7 +266,9 @@ namespace QueueProject.Migrations
 
                     b.HasOne("QueueProject.Models.User", "User")
                         .WithMany("Queues")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("OfficeObject");
 
@@ -279,9 +281,7 @@ namespace QueueProject.Migrations
                 {
                     b.HasOne("QueueProject.Models.Office", "Office")
                         .WithMany("Users")
-                        .HasForeignKey("OfficeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OfficeId");
 
                     b.HasOne("QueueProject.Models.Role", "Role")
                         .WithMany("Users")

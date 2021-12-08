@@ -14,7 +14,7 @@ namespace QueueProject.Models
 
         public int RoleId { get; set; }
         public Role Role { get; set; }
-        public int OfficeId { get; set; }
+        public int? OfficeId { get; set; }
         public Office Office { get; set; }
 
         public List<Queue> Queues { get; set; } = new List<Queue>();
