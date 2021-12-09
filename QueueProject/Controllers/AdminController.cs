@@ -115,7 +115,7 @@ namespace QueueProject.Controllers
             return Ok(userAdmin.Office.OfficeObjects.Select(x => new { x.OfficeObjectId, x.Name, x.Description, x.Max_users }));
         }
 
-        [HttpDelete("users/delete/{id}")]
+        [HttpDelete("OfficeObjects/delete/{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteOfficeObject(int id)
         {
@@ -140,7 +140,7 @@ namespace QueueProject.Controllers
             return Ok();
         }
 
-        [HttpPost("users/create")]
+        [HttpPost("OfficeObjects/create")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PostOfficeObject(OfficeObject model)
         {
@@ -158,6 +158,24 @@ namespace QueueProject.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(new { model.OfficeId, model.Name, model.Description, model.Max_users });
+        }
+
+        [HttpPut("OfficeObjects/edit")]
+        [Authorize(Roles = "Worker")]
+        public async Task<IActionResult> PutOfficeObjects(OfficeObject model)
+        {
+            var officeObject = await _context.OfficeObjects.SingleOrDefaultAsync(x => x.OfficeObjectId == model.OfficeObjectId);
+
+            if (officeObject == null)
+            {
+                return NotFound();
+            }
+
+            officeObject.Name = model.Name;
+            officeObject.Description = model.Description;
+
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
         [HttpGet("user/queue/all/{id}")]

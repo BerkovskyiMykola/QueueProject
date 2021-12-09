@@ -17,38 +17,15 @@ namespace QueueProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class AuthController : ControllerBase
     {
         private readonly DataContext _context;
         private readonly IJwtService _jwtService;
 
-        public UsersController(DataContext context, IJwtService jwtService)
+        public AuthController(DataContext context, IJwtService jwtService)
         {
             _context = context;
             _jwtService = jwtService;
-        }
-
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(RegisterRequest model)
-        {
-            if (await _context.Users.AnyAsync(x => x.Email == model.Email))
-            {
-                return BadRequest("User with such Email exists");
-            }
-            var user = new User()
-            {
-                Lastname = model.Lastname,
-                Firstname = model.Firstname,
-                Email = model.Email,
-                Password = GetPasswordHash(model.Password),
-                Role = await _context.Roles.SingleOrDefaultAsync(x => x.Title == model.Role)
-            };
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
-
-            var token = _jwtService.GetToken(new JwtUser { UserId = user.UserId, Role = user.Role.Title });
-
-            return Ok(new { token, user.UserId, user.Email, user.Role.Title });
         }
 
         [HttpPost("login")]
@@ -64,16 +41,6 @@ namespace QueueProject.Controllers
             var token = _jwtService.GetToken(new JwtUser { UserId = user.UserId, Role = user.Role.Title });
 
             return Ok(new { token, user.UserId, user.Email, user.Role.Title });
-        }
-
-        [HttpGet("all")]
-        [Authorize(Roles = "SuperAdmin")]
-        public async Task<IActionResult> GetUsers()
-        {
-            return Ok(await _context.Users
-                .Where(x => x.UserId.ToString() != HttpContext.User.Identity.Name)
-                .Select(x => new { x.UserId, x.Firstname, x.Lastname, x.Email })
-                .ToListAsync());
         }
 
         private string GetPasswordHash(string password)
