@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace QueueProject.Models
 {
@@ -54,6 +56,22 @@ namespace QueueProject.Models
                 StatusId = 3,
                 Title = "finished"
             });
+
+            modelBuilder.Entity<User>().HasData(new User()
+            {
+                UserId = Guid.NewGuid(),
+                Email = "GTA@gmail.com",
+                Password = GetPasswordHash("ainz1111"),
+                RoleId = 1,
+            });
+        }
+
+        private string GetPasswordHash(string password)
+        {
+            byte[] hash;
+            using (var sha1 = new SHA256CryptoServiceProvider())
+                hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return Convert.ToBase64String(hash);
         }
     }
 }

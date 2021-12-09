@@ -13,9 +13,9 @@ namespace QueueProject.Migrations
                 {
                     AddressId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Street = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     PostalCode = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -55,8 +55,8 @@ namespace QueueProject.Migrations
                 {
                     OfficeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     AddressId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -76,8 +76,8 @@ namespace QueueProject.Migrations
                 {
                     OfficeObjectId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Max_users = table.Column<int>(type: "int", nullable: false),
                     OfficeId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -97,8 +97,8 @@ namespace QueueProject.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Lastname = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Firstname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Lastname = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
+                    Firstname = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     DateBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -177,6 +177,11 @@ namespace QueueProject.Migrations
                     { 2, "using" },
                     { 3, "finished" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "DateBirth", "Email", "Firstname", "Lastname", "OfficeId", "Password", "RoleId" },
+                values: new object[] { new Guid("913e3516-5596-4e37-a716-6935e1eb7a86"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "GTA@gmail.com", null, null, null, "eMn4e4E2GLWkDYIhGsTlgwCXFcBW9VvE8UUKNlmAY1E=", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_OfficeObjects_OfficeId",

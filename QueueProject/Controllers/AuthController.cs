@@ -49,7 +49,6 @@ namespace QueueProject.Controllers
             using (var sha1 = new SHA256CryptoServiceProvider())
                 hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(password));
             return Convert.ToBase64String(hash);
-
         }
     }
 }

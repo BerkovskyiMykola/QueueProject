@@ -7,14 +7,11 @@ namespace QueueProject.Models
     public class User
     {
         public Guid UserId { get; set; }
-        [Required]
         [StringLength(30, MinimumLength = 2)]
         public string Lastname { get; set; }
-        [Required]
         [StringLength(30, MinimumLength = 2)]
         public string Firstname { get; set; }
         public DateTime DateBirth { get; set; }
-        [Required]
         [EmailAddress]
         public string Email { get; set; }
         public string Password { get; set; }
