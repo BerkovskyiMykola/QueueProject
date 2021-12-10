@@ -27,10 +27,14 @@ i18n.use(LanguageDetector).init({
                 CreateBackup: "Create Backup",
                 RestoreDatabase: "Restore Вatabase",
                 Addresses: "Addresses",
+                OfficeName: "Office name",
+                Info: "Info",
+                description: "Description",
+
 
                 "This is not a valid email. Example: example@example.com": "This is not a valid email. Example: example@example.com",
                 "The field must be between 2 and 30 characters.": "The field must be between 2 and 30 characters.",
-                "The field must be between 2 and 50 characters.": "The field must be between 2 and 50 characters.",
+                "The field must be between 3 and 256 characters.": "The field must be between 3 and 256 characters.",
                 "The password must be between 8 and 18 characters.": "The password must be between 8 and 18 characters.",
                 "The field must be between 3 and 40 characters.": "The field must be between 3 and 40 characters.",
 
@@ -63,11 +67,14 @@ i18n.use(LanguageDetector).init({
                 CreateBackup: "Створити резервну копію",
                 RestoreDatabase: "Відновити базу даних",
                 Addresses: "Адреси",
+                OfficeName: "Назва офіса",
+                Info: "Інформація",
+                description: "Опис",
 
                 "This field is required!": "Це поле необхідне!",
                 "This is not a valid email. Example: example@example.com": "Це не валідна пошта. Наприклад: example@example.com",
                 "The field must be between 2 and 30 characters.": "Поле має містити від 2 до 30 символів.",
-                "The field must be between 2 and 50 characters.": "Поле має містити від 2 до 50 символів.",
+                "The field must be between 3 and 256 characters.": "The field must be between 3 and 256 characters.",
                 "The password must be between 8 and 18 characters.": "Пароль має містити від 8 до 18 символів.",
                 "The field must be between 3 and 40 characters.": "Поле має містити від 3 до 40 символів.",
 

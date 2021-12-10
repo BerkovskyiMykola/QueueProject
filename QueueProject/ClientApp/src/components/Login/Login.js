@@ -36,7 +36,7 @@ export default function Login(props) {
         }
     }
     if (isLoggedIn && user.role === "SuperAdmin") {
-        return <Redirect to="/Address" />;
+        return <Redirect to="/address" />;
     }
     if (isLoggedIn && user.role === "Admin") {
         return <Redirect to="/Profile" />;

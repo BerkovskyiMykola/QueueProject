@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { history } from '../../../utils/history';
 
 const AddressItem = ({ item, index, editAddress, deleteAddress }) => {
     const { country, city, street, postalCode, addressId } = item;
@@ -20,6 +21,11 @@ const AddressItem = ({ item, index, editAddress, deleteAddress }) => {
                     onClick={() => { deleteAddress(addressId) } }
                     className="btn btn-outline-danger btn-sm float-left">
                     <i className="fa fa-trash-o" />
+                </button>
+                <button
+                    onClick={() => { history.push("/offices/" + addressId) }}
+                    className="btn btn-outline-info btn-sm float-left">
+                    <i className="fa fa-folder-open-o" />
                 </button>
             </td>
         </tr>

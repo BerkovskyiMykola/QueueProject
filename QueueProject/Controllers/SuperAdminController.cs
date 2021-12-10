@@ -110,24 +110,34 @@ namespace QueueProject.Controllers
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> GetOffices(int id)
         {
-            var offices = await _context.Offices
-                .Where(x => x.AddressId == id)
-                .Include(x => x.Users.Where(x => x.RoleId == 2))
-                .ThenInclude(x => x.Role)
-                .ToListAsync();
+            var address = await _context.Addresses
+                .Include(x => x.Offices).ThenInclude(x => x.Users.Where(x => x.RoleId == 2)).ThenInclude(x => x.Role)
+                .SingleOrDefaultAsync(x => x.AddressId == id);
 
-            return Ok(offices.Select(x => new
+            if(address == null)
             {
-                x.AddressId,
-                x.Name,
-                x.Description,
-                Admin = new { x.Users.FirstOrDefault()?.Lastname,
-                    x.Users.FirstOrDefault()?.Firstname, 
-                    x.Users.FirstOrDefault()?.Email, 
-                    x.Users.FirstOrDefault()?.DateBirth, 
-                    Role = x.Users.FirstOrDefault()?.Role.Title 
-                }
-            }));
+                return NotFound();
+            }
+
+            return Ok(new
+            {
+                addressName = $"{address.Country} {address.City} {address.Street} {address.PostalCode}",
+                offices = address.Offices.Select(x => new
+                {
+                    x.OfficeId,
+                    x.AddressId,
+                    x.Name,
+                    x.Description,
+                    Admin = new
+                    {
+                        x.Users.FirstOrDefault()?.Lastname,
+                        x.Users.FirstOrDefault()?.Firstname,
+                        x.Users.FirstOrDefault()?.Email,
+                        x.Users.FirstOrDefault()?.DateBirth,
+                        Role = x.Users.FirstOrDefault()?.Role.Title
+                    }
+                })
+            });
         }
 
         [HttpPost("offices/create")]
@@ -164,7 +174,8 @@ namespace QueueProject.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(new { 
+            return Ok(new {
+                office.OfficeId,
                 office.AddressId, 
                 office.Name,
                 office.Description,
