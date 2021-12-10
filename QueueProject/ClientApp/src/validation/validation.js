@@ -41,6 +41,16 @@ export const validateDescription = (t) => (value) => {
     }
 };
 
+export const validateLength40Between3 = (t) => (value) => {
+    if (value.length > 40 || value.length < 3) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                {t("The field must be between 3 and 40 characters.")}
+            </div>
+        );
+    }
+};
+
 export const validatePassword = (t) => (value) => {
     if (value.length < 8 || value.length > 18) {
         return (

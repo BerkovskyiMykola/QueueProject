@@ -40,7 +40,7 @@ namespace QueueProject.Controllers
 
             var token = _jwtService.GetToken(new JwtUser { UserId = user.UserId, Role = user.Role.Title });
 
-            return Ok(new { token, user.UserId, user.Email, user.Role.Title });
+            return Ok(new { token, user.UserId, user.Email, Role = user.Role.Title });
         }
 
         private string GetPasswordHash(string password)
