@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 import Input from "react-validation/build/input";
 
-const Field = ({ title, name, value, setValue, validations, type = "text", min }) => {
+const Field = ({ title, name, value, setValue, validations, type = "text", min, max }) => {
 
     return (
         <div className="form-group">
@@ -14,6 +14,7 @@ const Field = ({ title, name, value, setValue, validations, type = "text", min }
                 min={min}
                 onChange={setValue}
                 validations={validations}
+                max={max}
             />
         </div>
     );

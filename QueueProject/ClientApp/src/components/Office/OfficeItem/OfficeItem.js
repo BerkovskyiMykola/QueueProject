@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 
 const OfficeItem = ({ item, index, deleteOffice, getFields }) => {
-    const { name, description, admin, addressId, officeId } = item;
+    const { name, description, admin, officeId } = item;
 
     return (
         <tr>

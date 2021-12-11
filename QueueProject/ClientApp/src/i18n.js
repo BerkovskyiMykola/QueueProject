@@ -30,11 +30,13 @@ i18n.use(LanguageDetector).init({
                 OfficeName: "Office name",
                 Info: "Info",
                 description: "Description",
-
+                DateBirth: "Date of Birth",
+                CompanyName: "Company name",
+                CompanyDescription: "Company description",
 
                 "This is not a valid email. Example: example@example.com": "This is not a valid email. Example: example@example.com",
                 "The field must be between 2 and 30 characters.": "The field must be between 2 and 30 characters.",
-                "The field must be between 3 and 256 characters.": "The field must be between 3 and 256 characters.",
+                "The field must be between 0 and 256 characters.": "The field must be between 0 and 256 characters.",
                 "The password must be between 8 and 18 characters.": "The password must be between 8 and 18 characters.",
                 "The field must be between 3 and 40 characters.": "The field must be between 3 and 40 characters.",
 
@@ -70,11 +72,14 @@ i18n.use(LanguageDetector).init({
                 OfficeName: "Назва офіса",
                 Info: "Інформація",
                 description: "Опис",
+                DateBirth: "Дата народження",
+                CompanyName: "Назва компанії",
+                CompanyDescription: "Опис компанії",
 
                 "This field is required!": "Це поле необхідне!",
                 "This is not a valid email. Example: example@example.com": "Це не валідна пошта. Наприклад: example@example.com",
                 "The field must be between 2 and 30 characters.": "Поле має містити від 2 до 30 символів.",
-                "The field must be between 3 and 256 characters.": "The field must be between 3 and 256 characters.",
+                "The field must be between 0 and 256 characters.": "The field must be between 0 and 256 characters.",
                 "The password must be between 8 and 18 characters.": "Пароль має містити від 8 до 18 символів.",
                 "The field must be between 3 and 40 characters.": "Поле має містити від 3 до 40 символів.",
 

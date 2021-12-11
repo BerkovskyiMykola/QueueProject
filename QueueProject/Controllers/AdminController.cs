@@ -22,6 +22,42 @@ namespace QueueProject.Controllers
             _context = context;
         }
 
+        [HttpGet("profile/get")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetProfile()
+        {
+            var user = await _context.Users.Include(x => x.Office).SingleOrDefaultAsync(x => x.UserId.ToString() == HttpContext.User.Identity.Name);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(new { user.Lastname, user.Firstname, user.Email, user.DateBirth, user.Office.Name, user.Office.Description});
+        }
+
+        [HttpPut("profile/edit")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> PutProfile(EditProfileRequest model)
+        {
+            var user = await _context.Users.Include(x => x.Office).SingleOrDefaultAsync(x => x.UserId.ToString() == HttpContext.User.Identity.Name);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            user.Lastname = model.Lastname;
+            user.Firstname = model.Firstname;
+            user.DateBirth = model.DateBirth;
+            user.Office.Name = model.Name;
+            user.Office.Description = model.Description;
+
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
         [HttpGet("users/all")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetUsers()

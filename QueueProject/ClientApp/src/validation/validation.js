@@ -32,10 +32,10 @@ export const validateField = (t) => (value) => {
 };
 
 export const validateDescription = (t) => (value) => {
-    if (value.length > 256 || value.length < 3) {
+    if (value.length > 256 || value.length < 0) {
         return (
             <div className="alert alert-danger" role="alert">
-                {t("The field must be between 3 and 256 characters.")}
+                {t("The field must be between 0 and 256 characters.")}
             </div>
         );
     }
