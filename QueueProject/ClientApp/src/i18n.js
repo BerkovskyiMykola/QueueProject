@@ -33,6 +33,7 @@ i18n.use(LanguageDetector).init({
                 DateBirth: "Date of Birth",
                 CompanyName: "Company name",
                 CompanyDescription: "Company description",
+                Users: "Users",
 
                 "This is not a valid email. Example: example@example.com": "This is not a valid email. Example: example@example.com",
                 "The field must be between 2 and 30 characters.": "The field must be between 2 and 30 characters.",
@@ -75,6 +76,7 @@ i18n.use(LanguageDetector).init({
                 DateBirth: "Дата народження",
                 CompanyName: "Назва компанії",
                 CompanyDescription: "Опис компанії",
+                Users: "Користувачі",
 
                 "This field is required!": "Це поле необхідне!",
                 "This is not a valid email. Example: example@example.com": "Це не валідна пошта. Наприклад: example@example.com",

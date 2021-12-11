@@ -11,6 +11,7 @@ import { Home } from "./components/Home";
 import NotFound from "./components/NotFound";
 import Address from "./components/Address/Address"
 import Office from "./components/Office/Office"
+import User from "./components/User/User"
 
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
@@ -83,6 +84,11 @@ export default function App() {
                                     </>
                                 ) : (<>
                                         <li className="nav-item">
+                                            <Link to={"/user"} className="nav-link">
+                                                {t("Users")}
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
                                             <Link to={"/profile"} className="nav-link">
                                                 {t("Profile")}
                                             </Link>
@@ -110,6 +116,7 @@ export default function App() {
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/address" component={Address} />
+                        <Route exact path="/user" component={User} />
                         <Route exact path="/offices/:addressId" component={Office} />
                         <Route exact path="/404" component={NotFound} />
                         <Route component={NotFound} />

@@ -197,7 +197,7 @@ namespace QueueProject.Controllers
         }
 
         [HttpPut("OfficeObjects/edit")]
-        [Authorize(Roles = "Worker")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutOfficeObjects(OfficeObject model)
         {
             var officeObject = await _context.OfficeObjects.SingleOrDefaultAsync(x => x.OfficeObjectId == model.OfficeObjectId);
