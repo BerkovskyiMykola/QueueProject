@@ -246,16 +246,31 @@ namespace QueueProject.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetQueueForOfficeObject(int id)
         {
-            var user = await _context.OfficeObjects
+            var officeObject = await _context.OfficeObjects
                 .Include(x => x.Queues)
+                .ThenInclude(x => x.User)
+                .Include(x => x.Queues)
+                .ThenInclude(x => x.Status)
                 .SingleOrDefaultAsync(x => x.OfficeObjectId == id);
 
-            if (user == null)
+            if (officeObject == null)
             {
                 return NotFound();
             }
 
-            return Ok(user.Queues);
+            return Ok(new
+            {
+                officeObject.Name,
+                officeObject.Description,
+                queues = officeObject.Queues.Select(x => new {
+                    x.QueueId,
+                    User = $"{x.User.Lastname} {x.User.Firstname}",
+                    Status = x.Status.Title,
+                    x.DateTimeCreate,
+                    x.DateTimeUsing,
+                    x.DateTimeFinish,
+                })
+            });
         }
     }
 }

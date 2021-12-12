@@ -14,6 +14,7 @@ import Office from "./components/Office/Office"
 import User from "./components/User/User"
 import OfficeObject from "./components/OfficeObject/OfficeObject"
 import UserQueue from "./components/UserQueue/UserQueue"
+import OfficeObjectQueue from "./components/OfficeObjectQueue/OfficeObjectQueue"
 
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
@@ -124,6 +125,7 @@ export default function App() {
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path="/address" component={Address} />
                         <Route exact path="/officeObject" component={OfficeObject} />
+                        <Route exact path="/officeObjectQueue/:officeObjectId" component={OfficeObjectQueue} />
                         <Route exact path="/user" component={User} />
                         <Route exact path="/offices/:addressId" component={Office} />
                         <Route exact path="/userQueue/:userId" component={UserQueue} />

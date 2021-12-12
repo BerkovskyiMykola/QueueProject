@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { history } from '../../../utils/history';
 
 const OfficeObjectItem = ({ item, index, editOfficeObject, deleteOfficeObject }) => {
 	const { name, description, max_users, officeObjectId } = item;
@@ -19,6 +20,11 @@ const OfficeObjectItem = ({ item, index, editOfficeObject, deleteOfficeObject })
 					onClick={() => { deleteOfficeObject(officeObjectId) } }
 					className="btn btn-outline-danger btn-sm float-left">
 					<i className="fa fa-trash-o" />
+				</button>
+				<button
+					onClick={() => { history.push("/officeObjectQueue/" + officeObjectId) }}
+					className="btn btn-outline-info btn-sm float-left">
+					<i className="fa fa-folder-open-o" />
 				</button>
 			</td>
 		</tr>

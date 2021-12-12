@@ -1,7 +1,12 @@
-﻿import { CREATE_OFFICE_OBJECT_SUCCESS, DELETE_OFFICE_OBJECT_SUCCESS, EDIT_OFFICE_OBJECT_SUCCESS, GET_OFFICE_OBJECTS } from "../constants/officeObject";
+﻿import { CREATE_OFFICE_OBJECT_SUCCESS, DELETE_OFFICE_OBJECT_SUCCESS, EDIT_OFFICE_OBJECT_SUCCESS, GET_OFFICE_OBJECTS, GET_OFFICE_OBJECT_QUEUES } from "../constants/officeObject";
 
 const initialState = {
-    officeObjects: []
+    officeObjects: [],
+    officeObjectQueues: {
+        name: "",
+        description: "",
+        queues: []
+    }
 };
 
 export default function (state = initialState, action) {
@@ -10,18 +15,27 @@ export default function (state = initialState, action) {
     switch (type) {
         case GET_OFFICE_OBJECTS:
             return {
+                ...state,
                 officeObjects: payload.officeObjects
+            }
+        case GET_OFFICE_OBJECT_QUEUES:
+            return {
+                ...state,
+                officeObjectQueues: payload
             }
         case CREATE_OFFICE_OBJECT_SUCCESS:
             return {
+                ...state,
                 officeObjects: [...state.officeObjects, payload.officeObject]
             }
         case DELETE_OFFICE_OBJECT_SUCCESS:
             return {
+                ...state,
                 officeObjects: state.officeObjects.filter(x => x.officeObjectId !== payload.id)
             }
         case EDIT_OFFICE_OBJECT_SUCCESS:
             return {
+                ...state,
                 officeObjects: state.officeObjects.map(item => {
                     if (item.officeObjectId === payload.officeObjectId)
                         return {

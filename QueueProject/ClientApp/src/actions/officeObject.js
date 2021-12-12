@@ -1,6 +1,6 @@
 ﻿import EventBus from "../common/EventBus";
 import { SET_MESSAGE } from "../constants/message";
-import { CREATE_OFFICE_OBJECT_ERROR, CREATE_OFFICE_OBJECT_SUCCESS, DELETE_OFFICE_OBJECT_ERROR, DELETE_OFFICE_OBJECT_SUCCESS, EDIT_OFFICE_OBJECT_ERROR, EDIT_OFFICE_OBJECT_SUCCESS, GET_OFFICE_OBJECTS } from "../constants/officeObject";
+import { CREATE_OFFICE_OBJECT_ERROR, CREATE_OFFICE_OBJECT_SUCCESS, DELETE_OFFICE_OBJECT_ERROR, DELETE_OFFICE_OBJECT_SUCCESS, EDIT_OFFICE_OBJECT_ERROR, EDIT_OFFICE_OBJECT_SUCCESS, GET_OFFICE_OBJECTS, GET_OFFICE_OBJECT_QUEUES } from "../constants/officeObject";
 import officeObjectService from "../services/officeObject.service";
 
 export const getOfficeObjects = () => (dispatch) => {
@@ -9,6 +9,26 @@ export const getOfficeObjects = () => (dispatch) => {
             dispatch({
                 type: GET_OFFICE_OBJECTS,
                 payload: { officeObjects: responce.data }
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            if (error.response && error.response.status === 401) {
+                EventBus.dispatch("logout");
+            }
+
+            return Promise.reject();
+        }
+    )
+}
+
+export const getOfficeObjectQueues = (id) => (dispatch) => {
+    return officeObjectService.getOfficeObjectQueues(id).then(
+        (responce) => {
+            dispatch({
+                type: GET_OFFICE_OBJECT_QUEUES,
+                payload: responce.data
             });
 
             return Promise.resolve();

@@ -46,6 +46,7 @@ i18n.use(LanguageDetector).init({
                 "in queue": "in queue",
                 "using": "using",
                 "finished": "finished",
+                User: "User",
 
                 "This is not a valid email. Example: example@example.com": "This is not a valid email. Example: example@example.com",
                 "The field must be between 2 and 30 characters.": "The field must be between 2 and 30 characters.",
@@ -101,6 +102,7 @@ i18n.use(LanguageDetector).init({
                 "in queue": "в черзі",
                 "using": "використовується",
                 "finished": "завершено",
+                User: "Користувач",
 
                 "This field is required!": "Це поле необхідне!",
                 "This is not a valid email. Example: example@example.com": "Це не валідна пошта. Наприклад: example@example.com",

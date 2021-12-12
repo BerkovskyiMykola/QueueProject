@@ -20,6 +20,10 @@ class OfficeObjectService {
     deleteOfficeObject(id) {
         return axios.delete(API_URL + "OfficeObjects/delete/" + id, { headers: authHeader() });
     }
+
+    getOfficeObjectQueues(id) {
+        return axios.get(API_URL + "OfficeObject/queue/all/" + id, { headers: authHeader() });
+    }
 }
 
 export default new OfficeObjectService();
