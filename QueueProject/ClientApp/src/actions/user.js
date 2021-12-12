@@ -1,6 +1,6 @@
 ﻿import EventBus from "../common/EventBus";
 import { SET_MESSAGE } from "../constants/message";
-import { CREATE_USER_ERROR, CREATE_USER_SUCCESS, DELETE_USER_ERROR, DELETE_USER_SUCCESS, GET_USERS } from "../constants/user";
+import { CREATE_USER_ERROR, CREATE_USER_SUCCESS, DELETE_USER_ERROR, DELETE_USER_SUCCESS, GET_USERS, GET_USER_QUEUES } from "../constants/user";
 import userService from "../services/user.service";
 
 export const getUsers = () => (dispatch) => {
@@ -9,6 +9,26 @@ export const getUsers = () => (dispatch) => {
             dispatch({
                 type: GET_USERS,
                 payload: { users: responce.data }
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            if (error.response && error.response.status === 401) {
+                EventBus.dispatch("logout");
+            }
+
+            return Promise.reject();
+        }
+    )
+}
+
+export const getUserQueues = (id) => (dispatch) => {
+    return userService.getUserQueues(id).then(
+        (responce) => {
+            dispatch({
+                type: GET_USER_QUEUES,
+                payload: responce.data
             });
 
             return Promise.resolve();

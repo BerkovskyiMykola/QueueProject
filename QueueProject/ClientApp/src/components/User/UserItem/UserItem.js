@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { history } from '../../../utils/history';
 
 const UserItem = ({ item, index, deleteUser }) => {
     const { firstname, lastname, email, dateBirth, userId } = item;
@@ -15,6 +16,11 @@ const UserItem = ({ item, index, deleteUser }) => {
                     onClick={() => { deleteUser(userId) } }
                     className="btn btn-outline-danger btn-sm float-left">
                     <i className="fa fa-trash-o" />
+                </button>
+                <button
+                    onClick={() => { history.push("/userQueue/" + userId) }}
+                    className="btn btn-outline-info btn-sm float-left">
+                    <i className="fa fa-folder-open-o" />
                 </button>
             </td>
         </tr>

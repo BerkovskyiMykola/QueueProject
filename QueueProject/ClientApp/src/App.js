@@ -13,6 +13,7 @@ import Address from "./components/Address/Address"
 import Office from "./components/Office/Office"
 import User from "./components/User/User"
 import OfficeObject from "./components/OfficeObject/OfficeObject"
+import UserQueue from "./components/UserQueue/UserQueue"
 
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
@@ -125,6 +126,7 @@ export default function App() {
                         <Route exact path="/officeObject" component={OfficeObject} />
                         <Route exact path="/user" component={User} />
                         <Route exact path="/offices/:addressId" component={Office} />
+                        <Route exact path="/userQueue/:userId" component={UserQueue} />
                         <Route exact path="/404" component={NotFound} />
                         <Route component={NotFound} />
                     </Switch>

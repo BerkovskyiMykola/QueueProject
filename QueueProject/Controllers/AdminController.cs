@@ -221,6 +221,9 @@ namespace QueueProject.Controllers
         {
             var user = await _context.Users
                 .Include(x => x.Queues)
+                .ThenInclude(x => x.OfficeObject)
+                .Include(x => x.Queues)
+                .ThenInclude(x => x.Status)
                 .SingleOrDefaultAsync(x => x.UserId == id);
 
             if (user == null)
@@ -228,7 +231,15 @@ namespace QueueProject.Controllers
                 return NotFound();
             }
 
-            return Ok(user.Queues);
+            return Ok(new { user.Lastname, user.Firstname, 
+                queues = user.Queues.Select(x => new { 
+                    x.QueueId, 
+                    OfficeObject = x.OfficeObject.Name, 
+                    Status = x.Status.Title,
+                    x.DateTimeCreate,
+                    x.DateTimeUsing,
+                    x.DateTimeFinish,
+                }) });
         }
 
         [HttpGet("OfficeObject/queue/all/{id}")]
