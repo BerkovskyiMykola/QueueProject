@@ -47,7 +47,7 @@ const OfficeObject = () => {
     const clearFields = () => {
         setName("");
         setDescription("");
-        setMax_users(0);
+        setMax_users(1);
         setOfficeObjectId(0);
     }
 
