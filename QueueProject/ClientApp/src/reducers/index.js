@@ -5,6 +5,7 @@ import address from "./address"
 import office from "./office"
 import profile from "./profile"
 import user from "./user"
+import officeObject from "./officeObject"
 
 export default combineReducers({
     auth,
@@ -12,5 +13,6 @@ export default combineReducers({
     address,
     office,
     profile,
-    user
+    user,
+    officeObject
 });

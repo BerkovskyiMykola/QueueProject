@@ -156,7 +156,7 @@ namespace QueueProject.Controllers
         public async Task<IActionResult> DeleteOfficeObject(int id)
         {
             var userAdmin = await _context.Users
-                .Include(x => x.Office).ThenInclude(x => x.OfficeObjects.SingleOrDefault(x => x.OfficeObjectId == id))
+                .Include(x => x.Office).ThenInclude(x => x.OfficeObjects)
                 .SingleOrDefaultAsync(x => x.UserId.ToString() == HttpContext.User.Identity.Name);
 
             if (userAdmin == null)
@@ -164,12 +164,12 @@ namespace QueueProject.Controllers
                 return NotFound();
             }
 
-            if (userAdmin.Office.OfficeObjects.FirstOrDefault() == null)
+            if (userAdmin.Office.OfficeObjects.FirstOrDefault(x => x.OfficeObjectId == id) == null)
             {
                 return NotFound();
             }
 
-            _context.OfficeObjects.Remove(userAdmin.Office.OfficeObjects.FirstOrDefault());
+            _context.OfficeObjects.Remove(userAdmin.Office.OfficeObjects.FirstOrDefault(x => x.OfficeObjectId == id));
 
             await _context.SaveChangesAsync();
 
@@ -193,7 +193,7 @@ namespace QueueProject.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(new { model.OfficeId, model.Name, model.Description, model.Max_users });
+            return Ok(new { model.OfficeObjectId, model.Name, model.Description, model.Max_users });
         }
 
         [HttpPut("OfficeObjects/edit")]
@@ -209,6 +209,7 @@ namespace QueueProject.Controllers
 
             officeObject.Name = model.Name;
             officeObject.Description = model.Description;
+            officeObject.Max_users = model.Max_users;
 
             await _context.SaveChangesAsync();
             return Ok();

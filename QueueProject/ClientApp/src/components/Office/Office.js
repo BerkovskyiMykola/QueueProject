@@ -93,7 +93,7 @@ const Office = (props) => {
                         </h3>
                     </Col>
                     <Col className="text-right">
-                        <Button onClick={() => { clearFields(); setModalAdd(true); }} color="success">{t("Create")}</Button>
+                        <Button onClick={() => { clearFields(); setModalAdd(true); } } color="success">{t("Create")}</Button>
                         <Button onClick={() => { dispatch(getOffices(addressId)); }}>
                             <i className="fa fa-refresh" aria-hidden="true"></i>
                         </Button>

@@ -34,6 +34,10 @@ i18n.use(LanguageDetector).init({
                 CompanyName: "Company name",
                 CompanyDescription: "Company description",
                 Users: "Users",
+                OfficeObjectName: "Office object Name",
+                OfficeObjectDescription: "Office object description",
+                Max_users: "Max users",
+                OfficeObjects: "Office objects",
 
                 "This is not a valid email. Example: example@example.com": "This is not a valid email. Example: example@example.com",
                 "The field must be between 2 and 30 characters.": "The field must be between 2 and 30 characters.",
@@ -77,6 +81,10 @@ i18n.use(LanguageDetector).init({
                 CompanyName: "Назва компанії",
                 CompanyDescription: "Опис компанії",
                 Users: "Користувачі",
+                OfficeObjectName: "Назва об'єкта офіса",
+                OfficeObjectDescription: "Опис об'єкта офіса",
+                Max_users: "Максимальна кількість користувачів",
+                OfficeObjects: "Об'єкти офіса",
 
                 "This field is required!": "Це поле необхідне!",
                 "This is not a valid email. Example: example@example.com": "Це не валідна пошта. Наприклад: example@example.com",
